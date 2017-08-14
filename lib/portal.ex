@@ -8,7 +8,7 @@ defmodule Portal do
   @doc """
   Starts transfering `data` from `left` to `right`.
   """
-  def transfert(left, right, data) do
+  def transfer(left, right, data) do
     # First add all data to the portal on the left
     for item <- data do
       Portal.Door.push(left, item)
@@ -30,6 +30,13 @@ defmodule Portal do
     end
 
     portal
+  end
+
+  @doc """
+  Shoots a new door with the given `color`.
+  """
+  def shoot(color) do
+    Supervisor.start_child(Portal.Supervisor, [color])
   end
 end
 
